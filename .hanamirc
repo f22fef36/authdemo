@@ -1,0 +1,3 @@
+project=authdemo
+test=minitest
+template=erb
