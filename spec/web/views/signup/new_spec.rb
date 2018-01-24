@@ -1,15 +1,14 @@
 require_relative '../../../spec_helper'
 
 describe Web::Views::Signup::New do
-  let(:exposures) { Hash[foo: 'bar'] }
+  let(:params)    { OpenStruct.new(valid?: false, error_messages: ['First name must be filled', 'Last name must be filled']) }
+  let(:exposures) { Hash[params: params] }
   let(:template)  { Hanami::View::Template.new('apps/web/templates/signup/new.html.erb') }
   let(:view)      { Web::Views::Signup::New.new(template, exposures) }
   let(:rendered)  { view.render }
 
-  it 'exposes #foo' do
-    skip 'This is an auto-generated test. Edit it and add your own tests.'
-
-    # Example
-    view.foo.must_equal exposures.fetch(:foo)
+  it 'displays form validation errors' do
+    rendered.must_include('First name must be filled')
+    rendered.must_include('Last name must be filled')
   end
 end

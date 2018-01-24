@@ -1,1 +1,45 @@
 <h2>Create an account</h2>
+
+<% unless params.valid? %>
+  <div class="errors">
+    <h3>There was a problem with your submission</h3>
+    <ul>
+    <% params.error_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%=
+  form_for :signup, '/signup' do
+    div class: 'input' do
+      label 'First Name', for: :first_name
+      text_field :first_name
+    end
+
+    div class: 'input' do
+      label 'Last Name', for: :last_name
+      text_field :last_name
+    end
+
+    div class: 'input' do
+      label 'E-mail Address', for: :email
+      text_field :email
+    end
+
+    div class: 'input' do
+      label 'Password', for: :password
+      password_field :password
+    end
+
+    div class: 'input' do
+      label 'Password Confirmation', for: :password_confirmation
+      password_field :password_confirmation
+    end
+
+    div class: 'controls' do
+      submit 'Sign up'
+    end
+  end
+%>
